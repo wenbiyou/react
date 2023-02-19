@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    [
+      "@babel/preset-react",
+      {
+        "pragma": "TinyReact.createElement" // 将jsx的React转换为TinyReact
+      }
+    ]
+  ]
+}
