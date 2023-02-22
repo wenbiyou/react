@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>redux</title>
+  </head>
+  <body>
+    <button id="plus">+</button>
+    <span id="count">0</span>
+    <button id="minus">-</button>
+
+    <script src="./redux.js"></script>
+
+    <script>
+      // 3.存储默认状态
+      const initState = {
+        count: 0,
+      };
+
+      // 2.创建reducer
+      function reducer(state = initState, action) {
+        switch (action.type) {
+          case "increment":
+            return { count: state.count + 1 };
+          case "decrement":
+            return { count: state.count - 1 };
+          default:
+            return state;
+        }
+      }
+
+      // 1. 创建store状态容器
+      const store = Redux.createStore(reducer);
+
+      // 4.定义actions
+      const increment = { type: "increment" };
+      const decrement = { type: "decrement" };
+
+      // 5.触发action
+      document.getElementById("plus").onclick = function () {
+        store.dispatch(increment);
+      };
+      document.getElementById("minus").onclick = function () {
+        store.dispatch(decrement);
+      };
+
+      // 6.订阅store
+      store.subscribe(() => {
+        // 获取state状态
+        const states = store.getState();
+        document.getElementById("count").innerHTML = states.count;
+      });
+    </script>
+  </body>
+</html>
